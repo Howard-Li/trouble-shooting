@@ -1,0 +1,17 @@
+when using PyCharm to update libraries, I get the error message: 
+attributeerror: 'module' object has no attribute 'geteuid'
+
+took me an hour to figure it our!
+
+solution:
+go to your python directory, for example, C:\Python27\Lib\site-packages\pip
+open and edit basecommand.py and download.py
+search for "os.geteuid()" (double quotations not included)
+then add single quotation to it. For example, the original line is :
+  write_debug_log = check_path_owner(debug_log_path, os.geteuid())
+what you should have is:
+  write_debug_log = check_path_owner(debug_log_path, 'os.geteuid()')
+
+that's it. Just edit these *two* python files and the problem is solved.
+
+Welcome to discuss the reason behind this.
